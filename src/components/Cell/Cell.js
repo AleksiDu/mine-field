@@ -1,12 +1,33 @@
 import React, { useState } from "react";
 import "./Cell.css";
 
-const Cell = (props) => {
+const Cell = ({
+  isMine,
+  isRevealed,
+  isFlagged,
+  isUnknown,
+  isClicked,
+  isEmpty,
+}) => {
   const [icon, setIcon] = useState("Cell");
 
-  const cellBtnStyle = "cell";
+  const cellBtnStyle =
+    "cell" +
+    (isRevealed ? "" : " hidden") +
+    (isMine ? " is-mine" : "") +
+    (isClicked ? " is-clicked" : "") +
+    (isEmpty ? " is-unknown" : "") +
+    (isFlagged ? " is-flag" : "");
 
-  console.log("props of cell", props.value);
+  const getValue = () => {
+    if (!isRevealed) {
+      return isFlagged ? "🚩" : null;
+    } else if (isMine) {
+      return "💣";
+    } else if (isEmpty) {
+      return "";
+    }
+  };
 
   //TODO cell BtnStyle will add styles depend of btn condition
   // ? 💣 and 🚩 for flag and bomb
@@ -21,6 +42,7 @@ const Cell = (props) => {
         onClick={handleClick}
         onContextMenu={handleClick}
       />
+      {getValue()}
     </div>
   );
 };
