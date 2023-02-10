@@ -1,27 +1,13 @@
 @import "https://fonts.googleapis.com/css?family=Roboto+Mono:700";
 
-.grid {
-  order: 3;
-  user-select: none;
-  position: relative;
-  margin: 10px auto;
-  width: 9em;
-  height: 9em;
-  font-size: 24px;
-  display: flex;
-  flex-flow: row wrap;
-  border: solid #808080;
-  border-width: 1px 0 0 1px;
-}
-
 .cell {
   display: block;
   position: relative;
-  width: 1.5em;
-  height: 1.5em;
+  width: 24px;
+  height: 24px;
   background: #c0c0c0;
   border-width: 0 1px 1px 0;
-  flex: 0 0 11.1111111111%;
+  flex: 0 0 11%;
   overflow: hidden;
   cursor: pointer;
   pointer-events: none;

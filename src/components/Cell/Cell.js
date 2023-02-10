@@ -12,10 +12,9 @@ const Cell = () => {
   };
 
   return (
-    <div>
+    <div className={cellBtnStyle}>
       <input
         type="checkbox"
-        className={cellBtnStyle}
         onClick={handleClick}
         onContextMenu={handleClick}
       />

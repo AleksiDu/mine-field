@@ -1,5 +1,6 @@
 import React from "react";
 import Cell from "../Cell/Cell";
+import "./Field.css";
 
 const Field = () => {
   let minesCount = 0;
