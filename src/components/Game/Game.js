@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Game.css";
 import Field from "../Field/Field";
 
-function Game() {
+const Game = () => {
   const [height, setHeight] = useState(8);
   const [width, setWidth] = useState(8);
   const [mines, setMines] = useState(10);
@@ -48,7 +48,7 @@ function Game() {
       </div>
     </div>
   );
-}
+};
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(n, max));
