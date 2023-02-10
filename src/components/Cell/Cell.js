@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./Cell.css";
 
-const Cell = () => {
+const Cell = (props) => {
   const [icon, setIcon] = useState("Cell");
 
   const cellBtnStyle = "cell";
+
+  console.log("props of cell", props.value);
+
   //TODO cell BtnStyle will add styles depend of btn condition
   // ? 💣 and 🚩 for flag and bomb
   const handleClick = (e) => {

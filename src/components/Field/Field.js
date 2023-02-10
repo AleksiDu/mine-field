@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Cell from "../Cell/Cell";
 import "./Field.css";
 
 const Field = ({ height, width, mines }) => {
+  const [xValue, setXValue] = useState();
+  const [yValue, setYValue] = useState();
+  const [nValue, setNValue] = useState(0);
+  const [isMine, setIsMine] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
+  const [isFlagged, setIsFlagged] = useState(false);
+  const [isUnknown, setIsUnknown] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const isEmpty = () => {
+    return nValue === 0 && isMine;
+  };
+
+  const gridCell = (y, x, isMine) => {
+    setYValue(y);
+    setXValue(x);
+    setIsMine(isMine);
+
+    isEmpty();
+  };
+
   const createNewField = (click = null) => {
     const grid = [];
     const rows = width;
@@ -13,8 +34,9 @@ const Field = ({ height, width, mines }) => {
     for (let i = 0; i <= columns; i++) {
       grid.push([]);
       for (let j = 0; j <= rows; j++) {
-        const gridCell = new GridCell(i, j, arrOfMines.includes(i * rows + j));
-        addGridCell(grid, gridCell);
+        const gridCells = gridCell(i, j, arrOfMines.includes(i * rows + j));
+        console.log("gridcells", gridCells);
+        addGridCell(grid, gridCells);
       }
     }
   };
@@ -78,26 +100,17 @@ const Field = ({ height, width, mines }) => {
         <span>Mines: {}</span>
       </div>
       <div className="grid" onContextMenu={(e) => e.preventDefault()}>
-        <Cell />
+        <Cell
+          isMine={isMine}
+          isRevealed={isRevealed}
+          isFlagged={isFlagged}
+          isUnknown={isUnknown}
+          isClicked={isClicked}
+          isEmpty={isEmpty}
+        />
       </div>
     </div>
   );
 };
-
-class GridCell {
-  constructor(y, x, isMine) {
-    this.x = x;
-    this.y = y;
-    this.n = 0;
-    this.isMine = isMine;
-    this.isRevealed = false;
-    this.isFlagged = false;
-    this.isUnknown = false;
-    this.isClicked = false;
-  }
-  get isEmpty() {
-    return this.n === 0 && !this.isMine;
-  }
-}
 
 export default Field;
