@@ -10,7 +10,6 @@ const Field = () => {
         <span>Mines: {minesCount}</span>
       </div>
       <div className="grid" onContextMenu={(e) => e.preventDefault()}>
-        Render Field
         <Cell />
       </div>
     </div>

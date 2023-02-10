@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Cell.css";
 
 const Cell = () => {
   const [icon, setIcon] = useState("Cell");
@@ -12,13 +13,12 @@ const Cell = () => {
 
   return (
     <div>
-      <button
+      <input
+        type="checkbox"
         className={cellBtnStyle}
         onClick={handleClick}
         onContextMenu={handleClick}
-      >
-        {icon}
-      </button>
+      />
     </div>
   );
 };
