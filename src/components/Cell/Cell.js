@@ -1,50 +1,59 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
+
 import "./Cell.css";
 
-const Cell = ({
-  isMine,
-  isRevealed,
-  isFlagged,
-  isUnknown,
-  isClicked,
-  isEmpty,
-}) => {
-  const [icon, setIcon] = useState("Cell");
+class Cell extends React.Component {
+  getValue() {
+    const { value } = this.props;
 
-  const cellBtnStyle =
-    "cell" +
-    (isRevealed ? "" : " hidden") +
-    (isMine ? " is-mine" : "") +
-    (isClicked ? " is-clicked" : "") +
-    (isEmpty ? " is-unknown" : "") +
-    (isFlagged ? " is-flag" : "");
-
-  const getValue = () => {
-    if (!isRevealed) {
-      return isFlagged ? "🚩" : null;
-    } else if (isMine) {
+    if (!value.isRevealed) {
+      return this.props.value.isFlagged ? "🚩" : null;
+    } else if (value.isMine) {
       return "💣";
-    } else if (isEmpty) {
+    } else if (value.isEmpty) {
       return "";
     }
-  };
 
-  //TODO cell BtnStyle will add styles depend of btn condition
-  // ? 💣 and 🚩 for flag and bomb
-  const handleClick = (e) => {
-    e.nativeEvent.button === 2 ? setIcon("💣") : setIcon("🚩");
-  };
+    return value.n;
+  }
 
-  return (
-    <div className={cellBtnStyle}>
-      <input
-        type="checkbox"
-        onClick={handleClick}
-        onContextMenu={handleClick}
-      />
-      {getValue()}
-    </div>
-  );
+  render() {
+    const className =
+      "cell" +
+      (this.props.value.isRevealed ? "" : " hidden") +
+      (this.props.value.isMine ? " is-mine" : "") +
+      (this.props.value.isClicked ? " is-clicked" : "") +
+      (this.props.value.isEmpty ? " is-empty" : "") +
+      (this.props.value.isUnknown ? " is-unknown" : "") +
+      (this.props.value.isFlagged ? " is-flag" : "");
+
+    return (
+      <div
+        className={className}
+        onClick={this.props.onClick}
+        onContextMenu={this.props.cMenu}
+      >
+        {this.getValue()}
+      </div>
+    );
+  }
+}
+
+// Type checking With PropTypes
+const cellItemShape = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  n: PropTypes.number,
+  isRevealed: PropTypes.bool,
+  isMine: PropTypes.bool,
+  isFlagged: PropTypes.bool,
+};
+
+Cell.propTypes = {
+  value: PropTypes.objectOf(PropTypes.shape(cellItemShape)),
+  onClick: PropTypes.func,
+  cMenu: PropTypes.func,
 };
 
 export default Cell;

@@ -1,39 +1,45 @@
-import { useState } from "react";
-import "./Game.css";
+import React, { useState, useRef } from "react";
 import Field from "../Field/Field";
+
+import "./Game.css";
 
 const Game = () => {
   const [height, setHeight] = useState(8);
   const [width, setWidth] = useState(8);
   const [mines, setMines] = useState(10);
-  const [status, setStatus] = useState(0);
+  const [gameStatus, setGameStatus] = useState(0);
 
-  const handleChangeHeight = (e) => {
-    const val = clamp(e.target.value, 5, 18);
+  const boardElement = useRef();
+
+  const handleChangeHeight = (event) => {
+    const val = clamp(event.target.value, 5, 18);
     setHeight(val);
-    console.log("Height set to:", val);
   };
 
-  const handleChangeWidth = (e) => {
-    const val = clamp(e.target.value, 5, 18);
+  const handleChangeWidth = (event) => {
+    const val = clamp(event.target.value, 5, 18);
     setWidth(val);
-    console.log("Width set to:", val);
   };
 
-  const handleChangeMines = (e) => {
+  const handleChangeMines = (event) => {
     const cap = Math.floor((height * width) / 3);
-    const val = clamp(e.target.value, 1, cap);
+    const val = clamp(event.target.value, 1, cap);
     setMines(val);
-    console.log("Mines set to:", val);
   };
 
   const restartGame = () => {
-    console.log("Restart Game");
+    boardElement.current.restartBoard();
   };
 
   return (
-    <div className="Game">
-      <Field height={height} width={width} mines={mines} status={status} />
+    <div className="game">
+      <Field
+        ref={boardElement}
+        height={height}
+        width={width}
+        mines={mines}
+        status={gameStatus}
+      />
       <div className="control-buttons">
         <button onClick={restartGame}>Restart</button>
 
