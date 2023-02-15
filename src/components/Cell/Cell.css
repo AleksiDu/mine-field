@@ -1,6 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Roboto+Mono:700";
 
-.cell {
+/* .cell {
   display: block;
   position: relative;
   width: 24px;
@@ -37,4 +37,59 @@
   font-size: 0.75rem;
   text-align: center;
   pointer-events: auto;
+} */
+
+.cell {
+  display: flex;
+  position: relative;
+  background-color: #c0c0c0;
+  border-width: 0 1px 1px 0;
+  border: 2px outset #ececec;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 11%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.2s;
+}
+
+.cell:not(first-child) {
+  margin-left: 0px;
+}
+
+.cell:focus {
+  outline: none;
+}
+
+.cell.is-clicked {
+  background-color: #dadada;
+}
+
+.cell.hidden {
+  background-color: #c0c0c0;
+}
+.cell.hidden:hover {
+  background-color: #ececec;
+}
+
+/* Flagged incorrectly*/
+.cell.is-flag:not(.is-mine):not(.hidden) {
+  background-color: #dadada;
+}
+
+/* Flagged correctly */
+.cell.is-flag.is-mine:not(.hidden) {
+  background-color: #dadada;
+}
+
+/* Clicked on a mine*/
+.cell.is-mine.is-clicked {
+  background-color: #dadada;
+}
+
+/* Empty revealed cells*/
+.cell.is-empty:not(.hidden):not(.is-mine):not(.is-flagged) {
+  background-color: #dadada;
 }

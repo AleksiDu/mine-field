@@ -3,11 +3,12 @@
   user-select: none;
   position: relative;
   margin: 10px auto;
-  width: 9em;
-  height: 9em;
-  font-size: 24px;
+  width: 12em;
+  height: 12em;
+  font-size: 20px;
   display: flex;
   flex-flow: row wrap;
   border: solid #808080;
   border-width: 1px 0 0 1px;
+  font-family: "Roboto Mono", monospace;
 }
